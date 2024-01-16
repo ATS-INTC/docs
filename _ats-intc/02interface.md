@@ -6,9 +6,8 @@ category: docs
 layout: post
 ---
 
-### Interfaces provided for Operating System
 
-#### Interfaces of priority scheduler:
+### Interfaces of priority scheduler:
 
 | Interface |       Arguments        |     Output   | Description |
 |-----------|------------------------|--------------|-------------|
@@ -17,16 +16,16 @@ layout: post
 | rmembuf   | memory buffer pointer  |              | It writes the address of membuf with the memory buffer pointer. |
 
 
-#### Interfaces of IPC:
+### Interfaces of IPC:
 
 | Interface |       Arguments        |     Output   | Description |
 |-----------|------------------------|--------------|-------------|
-| send      | ipc arguments          |              | It writes the address of arguments with IPC results. |
+| send      | ipc arguments pointer  |              | It writes the address of arguments with IPC results. |
 | wait      |                        | ipc res      | It waits the IPC results from the address of results. |
 | rmembuf   | memory buffer pointer  |              | It writes the address of membuf with the memory buffer pointer. |
 
 
-#### Interfaces of blocked task queue:
+### Interfaces of blocked task queue:
 
 | Interface |       Arguments        |     Output   | Description |
 |-----------|------------------------|--------------|-------------|

@@ -6,42 +6,41 @@ category: docs
 layout: post
 ---
 
-### Inner Structures and Behavior
 
-假设在 FPGA 中实现
+### Inner Structures
 
-4 个在线数据结构，优先级数量为 8，队列深度为 256。
+We only support 4 groups of internal data structures. Each group consists of two data structures: **Priority Scheduler** and **IPC Handler Queues**. The depth of each queue is 256.
 
-支持的中断数量 6，6个队列，每个队列深度为 256。
+#### Priority Scheduler
 
-支持的最大进程数量为 16，每个进程需要一个状态描述符，（8 + 8）* 16 = 256 字节
+Each Priority Scheduler consists of 8 priority queue.
 
+#### IPC Blocked Queues
 
-#### Inner Structures
+Each IPC Blocked Queues consists of 2 ipc blocked queue.
 
-##### Blocked Queue for External Device
+#### Blocked Queue for External Device
 
-##### Priority Scheduler
+Each external device corresponds to a blocking queue. The maximum number of supported external devices is 6.
 
-##### IPC Message
+#### Process Status Table
 
-##### Blocked Queue for IPC
+Each process， no matter the process is online or offline, corresponds to a `Status Item` in Process Status Table. The total number of supported process is 16. The structure of `Status Item` is shown below.
 
-##### Process Status Table
-
-```Rust
-pub struct ProcStatus {
-    is_online: bool,
-    ps_bf: u64,
-    ipc_bf: u64,
-}
+```sh
+0      0x08       0x10   Byte
++---------+----------+
+| ps_mbuf | ipc_mbuf |
++---------+----------+
 ```
 
-
-#### Inner Behavior
-
+The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and the upper 8 bytes record the memory buffer pointer of `IPC Blocked Queues`. We use the lowest bit to indicate wheather the related process is online or offline(The memory buffer must be 2-byte aligned.).
 
 
-##### External Device Line Interrupt
+### Inner Behavior
 
-##### IPC Send Signal
+
+
+#### External Device Line Interrupt
+
+#### IPC Send Signal

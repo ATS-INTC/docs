@@ -6,17 +6,9 @@ category: docs
 layout: post
 ---
 
-### Register Space
+### Overview
 
-The `ATS-INTC` register space is shown below. The registers are memory-mapped into non-cacheable memory space. The memory space must be aligned on 32-bit boundary. All registers are in Little Endian format.
-
-```sh
-MSB                           LSB
-31    24 23   16 15    8 7      0
-+-------+-------+-------+-------+
-| BYTE3 | BYTE2 | BYTE1 | BYTE0 |
-+-------+-------+-------+-------+
-```
+The `ATS-INTC` register space is shown below. The registers are memory-mapped into non-cacheable memory space. The memory space must be aligned on 32-bit boundary. 
 
 |  Address Space Offset  |                      Name                     |
 | ---------------------- | --------------------------------------------- |
@@ -33,7 +25,7 @@ MSB                           LSB
 | 0xFF_D000 - 0xFF_F128  | External Interrupt Handler Descriptor         |
 
 
-#### Priority Queue Descriptor
+### Priority Queue Descriptor
 
 This structure is used for process to operate the priority scheduler in `ATS-INTC`.
 
@@ -44,7 +36,7 @@ This structure is used for process to operate the priority scheduler in `ATS-INT
 +---------+--------+---------+----------+--------+------------+
 ```
 
-##### Control Field Detail
+#### Control Field Detail
 
 ```sh
 0                                   249 250 251    255   Bit
@@ -59,7 +51,7 @@ Each bit in bitmap* is used to ensure mutually exclusive access between each ope
 3. % means this bit is used for the recording memory buffer operation.
 4. \- means this bit is reserved.
 
-#### IPC Descriptor (Not completed)
+### IPC Descriptor (Not completed)
 
 This structure is used for process to launch IPC using `ATS-INTC`.
 
@@ -70,7 +62,7 @@ This structure is used for process to launch IPC using `ATS-INTC`.
 +---------+--------+---------------------+---------+---------+--------+----------+----------+
 ```
 
-#### External Interrupt Handler Descriptor
+### External Interrupt Handler Descriptor
 
 This structure is used for kernel to operate the queues in which the tasks are blocked on external devices in `ATS-INTC`.
 
