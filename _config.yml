@@ -53,6 +53,9 @@ collections:
   pages:
     output: true
     permalink: /:collection/:path/
+  ats-intc:
+    output: true
+    permalink: /:collection/:path/
 
 page_width: 800px
 
