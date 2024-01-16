@@ -36,11 +36,22 @@ Each process， no matter the process is online or offline, corresponds to a `St
 
 The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and the upper 8 bytes record the memory buffer pointer of `IPC Blocked Queues`. We use the lowest bit to indicate wheather the related process is online or offline(The memory buffer must be 2-byte aligned.).
 
-
 ### Inner Behavior
 
+#### MMIO Read Write
 
+Different processing is performed based on the assigned MMIO address.
 
 #### External Device Line Interrupt
 
+1. It Receives an interrupt from an external device and obtains the interrupt vector number.
+2. It takes out a task from the corresponding device blocking queue based on the interrupt vector number.
+3. It inserts the fetched task into the kernel's highest priority task queue.
+
 #### IPC Send Signal
+
+1. It receives the sender's IPC initiation signal and obtains the receiver's process id and IPC type number.
+2. It searches the process status table. If the receiver is online, it takes out the corresponding blocking IPC handler coroutine from the receiver's IPC blocking queue according to the IPC type number; If the receiver is offline, it reads the memory according to the ipc_mbuf pointer in the status table. This operation may require several memory reads and writes.
+3. It adds the fetched IPC handler coroutine to the receiver's highest priority queue. If the receiver is not online, the memory is read according to ps_mbuf in the status table.
+
+   
