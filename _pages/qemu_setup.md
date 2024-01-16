@@ -2,7 +2,7 @@
 title: Qemu Environment Setup
 author: Fangliang Zhao
 date: 2024-01-16
-category: Qemu
+category: docs
 layout: post
 ---
 

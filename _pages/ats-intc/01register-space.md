@@ -2,7 +2,7 @@
 title: ATS-INTC Register Space
 author: Fangliang Zhao
 date: 2024-01-16
-category: ATS-INTC Design
+category: docs
 layout: post
 ---
 
