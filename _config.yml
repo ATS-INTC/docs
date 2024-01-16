@@ -1,16 +1,16 @@
 # Configurations
-title:            Jekyll Gitbook
-longtitle:        Jekyll Gitbook
-author:           HE Tao
-email:            sighingnow@gmail.com
+title:            docs
+longtitle:        docs
+author:           Fangliang Zhao
+email:            zfl22@mails.tsinghua.edu.cn
 description: >
-  Build Jekyll site with the GitBook style.
+  This Repository is the overall description documents of ATS-INTC.
 
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://sighingnow.github.io'
-baseurl:          '/jekyll-gitbook'
+url:              'https://ats-intc.github.io/'
+baseurl:          '/docs'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
