@@ -9,9 +9,9 @@ layout: post
 
 ### How to add a interrupt controller in rocket-chip
 
-The implementation of plic in rocket-chip is in `rocket-chip/src/main/scala/devices/tilelink/Plic.scala`. Then We just follow the implementation of plic and add a customized device to rocketchip.
+The implementation of plic in rocket-chip is in `rocket-chip/src/main/scala/devices/tilelink/Plic.scala`. Then We just follow the implementation of plic and add a customized device to rocket-chip.
 
-1. Create a sub directory `atsintc`, it also includes the `Config` and `Top` module of customized rocketchip.
+1. Create a sub directory `atsintc`, it also includes the `Config` and `Top` module of customized rocket-chip.
 2. Create the `ATSINTC.scala` in the `atsintc` directory, it defines the `ATSINTCKey`, `ATSINTCAttachParams`, `ATSINTCAttachKey`, `CanHavePeripheryATSINTC`.
 3. Add the `ATSINTCKey` to the `BaseSubsystemConfig` in the `Config.scala` file in the `subsystem` directory.
 4. Add the `CanHavePeripheryATSINTC` to the `HasTileInterruptSources` in the `HasTiles.scala` file in the `subsystem` directory.
