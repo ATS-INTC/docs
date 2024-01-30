@@ -14,3 +14,6 @@ cd qemu
 ./configure --target-list="riscv64-softmmu" --enable-slirp
 make -j
 ```
+
+> Maybe some packages are required such as ninja-build, libglib2.0-dev. You can use this command to install them. `sudo apt install ninja-build libglib2.0-dev`
+
