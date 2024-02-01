@@ -43,3 +43,12 @@ If you would like to run all benchmarks, you just need to run `make test`.
 > If you can not get verilator from github, please add the ip of github.com in your `/etc/hosts`.
 > Maybe you need to install `flex` and `bison`.(`sudo apt install flex bison`)
 
+### 4. Checkout vivado project and Generate bitstream
+
+After running benchmarks successfully, you can use the digilent-vivado-scripts to checkout vivado project.(You must be under the paltform directory.)
+
+1. Using `make checkout` to create the vivado project in batch mode. 
+2. Open the project in vivado GUI and change the top module from `soc_wrapper.v` to `system_wrapper.v`. 
+3. Click the `write_bitstream` button in the left.
+4. After writing bitstream successfully, you must export the hardware(include bitstream) to the `$PLATFORM/proj` directory.
+5. Using `make gen_bin` to generate the target bitstream used in FPGA and using `make upload` to upload the target bitstream and dtbo to the arm-linux in the PS side of FPGA.(If you use the other way to communicate with the arm-linux, you do not need to use this `script`.)
