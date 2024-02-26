@@ -38,6 +38,10 @@ The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and t
 
 ### Inner Behavior
 
+#### state graph
+
+![sys_arch](https://ats-intc.github.io/docs/assets/gitbook/images/behavior.png)
+
 #### MMIO Read Write
 
 Different processing is performed based on the assigned MMIO address.
