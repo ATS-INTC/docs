@@ -38,9 +38,9 @@ The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and t
 
 ### Inner Behavior
 
-#### state graph
+#### Behavior graph
 
-![sys_arch](https://ats-intc.github.io/docs/assets/gitbook/images/behavior.png)
+![behavior](https://ats-intc.github.io/docs/assets/gitbook/images/behavior.png)
 
 #### MMIO Read Write
 
