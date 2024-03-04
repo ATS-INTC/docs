@@ -1,0 +1,21 @@
+
+// {type: sequence}
+// {generate: true}
+
+[receiver] 1.register IPC handler > [atsintc]
+[atsintc] 2.IPC blocked queue of receiver enqueue > [atsintc]
+[sender] 3.IPC task write shared memory > [shared memory]
+[sender] 4.IPC task write MMIO register > [atsintc]
+[atsintc] 5.IPC blocked queue of sender enqueue > [atsintc]
+[atsintc] 6.IPC blocked queue of receiver dequeue > [atsintc]
+[atsintc] 7.receiver priority queue enqueue > [atsintc]
+[receiver] 7.fetch task > [atsintc]
+[atsintc] 8.receiver priority queue dequeue > [atsintc]
+[atsintc] 9.return the IPC handler > [receiver]
+[receiver] 10.read IPC arguments from shared memory > [shared memory]
+[receiver] 11.deal with IPC > [receiver]
+[receiver] 12.receiver IPC handler write MMIO register > [atsintc]
+[atsintc] 13.IPC blocked queue of sender dequeue > [atsintc]
+[atsintc] 14.sender priority queue enqueue > [atsintc]
+[sender] 15.fetch task > [atsintc]
+[atsintc] 16.return the blocked IPC task > [sender]

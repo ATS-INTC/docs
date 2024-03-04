@@ -1,0 +1,9 @@
+// {type:sequence}
+// {generate:true}
+
+[kernel] 1.create task > [kernel]
+[kernel] 2.push task > [atsintc]
+[atsintc] 3.inner priority queue enqueue > [atsintc]
+[kernel] 4.fetch task > [atsintc]
+[atsintc] 5.inner priority queue dequeue > [atsintc]
+[atsintc] 6.return the highest priority task > [kernel]

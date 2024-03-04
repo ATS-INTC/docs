@@ -23,10 +23,4 @@ Then we can get the device-tree information about our customized `ATSINTC` while
 
 The method of how to add MMIO register map is included in [Register Router](https://chipyard.readthedocs.io/en/stable/TileLink-Diplomacy-Reference/Register-Router.html) and [MMIO Peripherals](https://chipyard.readthedocs.io/en/stable/Customization/MMIO-Peripherals.html).
 
-#### Bug
 
-But when we combined the [ShiftQueue](https://github.com/chipsalliance/rocket-chip/blob/master/src/main/scala/util/ShiftQueue.scala) with MMIO read and write operations, we got a bug and did not know how to deal with it. The implementation and the result of test benchmark are shown below.
-
-![queue-bug](https://ats-intc.github.io/docs/assets/gitbook/images/queue-bug.png)
-
-![queue-res](https://ats-intc.github.io/docs/assets/gitbook/images/queue-res.png)

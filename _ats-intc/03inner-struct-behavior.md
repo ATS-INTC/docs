@@ -9,11 +9,15 @@ layout: post
 
 ### Inner Structures
 
-We only support 4 groups of internal data structures. Each group consists of two data structures: **Priority Scheduler** and **IPC Handler Queues**. The depth of each queue is 256.
+The **Priority Scheduler** and **IPC Handler Queues** belong to the specific kernel or user process. We only support four groups of two structures. The **Blocked Queue for External Device** and **Process Status Table** belong to the whole system and maintaine the global information, so we just need support one. 
 
 #### Priority Scheduler
 
-Each Priority Scheduler consists of 8 priority queue.
+The Priority Scheduler consists of 8 priority queues. The implementation in the QEMU is the multi-FIFO queue. 
+
+![multi-fifo](https://ats-intc.github.io/docs/assets/gitbook/images/multi-fifo.png)
+
+The implementation in the Rocket-chip is based on this [paper](https://ieeexplore.ieee.org/document/4380693). The repository is [here](https://github.com/zflcs/chisel-priority-queue).
 
 #### IPC Blocked Queues
 
@@ -38,21 +42,29 @@ The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and t
 
 ### Inner Behavior
 
-#### Behavior graph
+#### The Behavior of ATSINTC
 
 ![behavior](https://ats-intc.github.io/docs/assets/gitbook/images/behavior.png)
 
-#### MMIO Read Write
+#### The basic function of priority scheduling
 
-Different processing is performed based on the assigned MMIO address.
+![priority scheduling](https://ats-intc.github.io/docs/assets/gitbook/images/priorityscheduler.svg)
 
-#### External Device Line Interrupt
+The `push` and `fetch` operation is performed based on the assigned MMIO address.
+
+#### External Device Line Interrupt handler
+
+![external interrupt handling](https://ats-intc.github.io/docs/assets/gitbook/images/extintr.svg)
 
 1. It Receives an interrupt from an external device and obtains the interrupt vector number.
 2. It takes out a task from the corresponding device blocking queue based on the interrupt vector number.
 3. It inserts the fetched task into the kernel's highest priority task queue.
 
 #### IPC Send Signal
+
+![syscall](https://ats-intc.github.io/docs/assets/gitbook/images/syscall.svg)
+
+![ipc](https://ats-intc.github.io/docs/assets/gitbook/images/ipc.svg)
 
 1. It receives the sender's IPC initiation signal and obtains the receiver's process id and IPC type number.
 2. It searches the process status table. If the receiver is online, it takes out the corresponding blocking IPC handler coroutine from the receiver's IPC blocking queue according to the IPC type number; If the receiver is offline, it reads the memory according to the ipc_mbuf pointer in the status table. This operation may require several memory reads and writes.

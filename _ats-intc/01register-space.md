@@ -56,10 +56,10 @@ Each bit in bitmap* is used to ensure mutually exclusive access between each ope
 This structure is used for process to launch IPC using `ATS-INTC`.
 
 ```sh
-0       0x8     0x10                  0x18      0x20      0x28     0x90       0x98      0x100   Byte
-+---------+--------+---------------------+---------+---------+--------+----------+----------+
-| control | membuf | ipc message pointer | ipc_bq0 | ipc_bq1 | ...... | ipc_bq15 | reserved |
-+---------+--------+---------------------+---------+---------+--------+----------+----------+
+0       0x8     0x10   0x18      0x20      0x28     0x90       0x98      0x100   Byte
++---------+--------+------+---------+---------+--------+----------+----------+
+| control | membuf | send | ipc_bq0 | ipc_bq1 | ...... | ipc_bq15 | reserved |
++---------+--------+------+---------+---------+--------+----------+----------+
 ```
 
 ### External Interrupt Handler Descriptor
