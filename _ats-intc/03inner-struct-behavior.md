@@ -9,7 +9,9 @@ layout: post
 
 ### Inner Structures
 
-The **Priority Scheduler** and **IPC Handler Queues** belong to the specific kernel or user process. We only support four groups of two structures. The **Blocked Queue for External Device** and **Process Status Table** belong to the whole system and maintaine the global information, so we just need support one. 
+The **Priority Scheduler** and **IPC Handler Queues** belong to the specific kernel or user process. We only support four groups of these two structures. The **Blocked Queues for External Device** and **Process Status Table** belong to the whole system and maintain the global information, so we just need support one. 
+
+> **Note**: All blocked queues only support the top abstract of respective handler. For example, the syscall(IPC) queue only maintains the blocked syscall dispatch task, the specific syscall handler related to the syscall arguments is not supported.
 
 #### Priority Scheduler
 
@@ -18,6 +20,8 @@ The Priority Scheduler consists of 8 priority queues. The implementation in the 
 ![multi-fifo](https://ats-intc.github.io/docs/assets/gitbook/images/multi-fifo.png)
 
 The implementation in the Rocket-chip is based on this [paper](https://ieeexplore.ieee.org/document/4380693). The repository is [here](https://github.com/zflcs/chisel-priority-queue).
+
+![mq](https://ats-intc.github.io/docs/assets/gitbook/images/mq.png)
 
 #### IPC Blocked Queues
 
@@ -52,7 +56,7 @@ The lower 8 bytes record the memory buffer pointer of `Priority Scheduler` and t
 
 The `push` and `fetch` operation is performed based on the assigned MMIO address.
 
-#### External Device Line Interrupt handler
+#### External Device Line Interrupt handling
 
 ![external interrupt handling](https://ats-intc.github.io/docs/assets/gitbook/images/extintr.svg)
 
@@ -60,7 +64,7 @@ The `push` and `fetch` operation is performed based on the assigned MMIO address
 2. It takes out a task from the corresponding device blocking queue based on the interrupt vector number.
 3. It inserts the fetched task into the kernel's highest priority task queue.
 
-#### IPC Send Signal
+#### IPC handling
 
 ![syscall](https://ats-intc.github.io/docs/assets/gitbook/images/syscall.svg)
 
